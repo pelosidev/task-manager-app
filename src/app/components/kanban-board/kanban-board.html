@@ -1,0 +1,47 @@
+<div class="board-container">
+  <h2>Meu Painel Kanban</h2>
+
+  <div class="board">
+    <!-- Coluna: A Fazer -->
+    <div class="column">
+      <h3>A Fazer</h3>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[inProgressList, doneList]"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of todo" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+
+    <!-- Coluna: Em Andamento -->
+    <div class="column">
+      <h3>Em Andamento</h3>
+      <div
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="in_progress"
+        [cdkDropListConnectedTo]="[todoList, doneList]"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of in_progress" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+
+    <!-- Coluna: Concluído -->
+    <div class="column">
+      <h3>Concluído</h3>
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList, inProgressList]"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+  </div>
+</div>
