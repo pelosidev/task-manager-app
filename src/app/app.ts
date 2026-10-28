@@ -1,13 +1,26 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board';
+import { AuthService } from './services/auth.service';
 
 @Component({
-  imports: [RouterOutlet, KanbanBoardComponent],
   selector: 'app-root',
-  styleUrl: './app.scss',
+  standalone: true,
+  imports: [CommonModule, KanbanBoardComponent],
   templateUrl: './app.html',
+  styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('task-manager-app');
+  title = 'task-manager-app';
+  authService = inject(AuthService);
+
+  // Inicia o fluxo de login com o Google através do popup
+  login() {
+    this.authService.loginWithGoogle();
+  }
+
+  // Faz o logout do utilizador
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -5,7 +5,8 @@
   "compilerOptions": {
     "types": [
       "vitest/globals"
-    ]
+    ],
+    "composite": true
   },
   "include": [
     "src/**/*.d.ts",
